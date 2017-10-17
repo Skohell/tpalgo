@@ -5,6 +5,8 @@
  */
 package tpalgo;
 
+
+
 /**
  *
  * @author gravallg
@@ -16,24 +18,24 @@ public class Tpalgo {
      */
     public static void main(String[] args) {
         
-        CircularList<Integer> cl = new CircularList<>();
-        
-        cl.pushBack(1);
-        cl.pushBack(2);
-        cl.pushBack(3);
-        cl.pushBack(4);
-        cl.pushBack(5);
-        cl.pushBack(6);
-        cl.pushBack(7);
-        
-        System.out.println(cl.toString()+"\n");
+      
+       testElection t = new testElection();
        
+       //t.testExemple();
+       
+       int[] k = {2,3,5,10};
+       int[] n = {(int)Math.pow(10,3),(int)Math.pow(10,4),(int)Math.pow(10,5),(int)Math.pow(10,6)};
+       for(int i : n)
+       {
+           for(int j : k)
+           {
+               t.testElection(j,i,false);
+           }
+       }
         
-        cl.elect(3);
-        
-        
-        System.out.println(cl.toString()+"\n");
 
+     
     }
     
+
 }

@@ -1,5 +1,7 @@
 package tpalgo;
 
+import sun.rmi.runtime.Log;
+
 public class CircularList<Type> 
 {
 
@@ -186,8 +188,11 @@ public class CircularList<Type>
 		return cell;
 	}
         
-        public Type elect(int step)
+        public Type elect(int step, boolean output)
         {
+            
+           
+            
             if(list == null)
                 return null;
             
@@ -198,11 +203,19 @@ public class CircularList<Type>
                     list = list.getNext();
                 }
                 
-                System.out.println(popFront() + " is eliminated...\n");
+                
+                Type val = popFront();
+                
+                if(output)
+                {
+                    System.out.println(val.toString() + " is eliminated...");
+
+                }
                 
             }
             
-            System.out.println(list.getData().toString() + " is elected !\n");
+            
+            System.out.println(list.getData().toString() + " is elected !");
             return list.getData();
         }
         
