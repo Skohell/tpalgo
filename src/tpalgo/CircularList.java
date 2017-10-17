@@ -2,6 +2,40 @@ package tpalgo;
 
 public class CircularList<Type> 
 {
+
+    private class Cell<Type> 
+    {
+	private Type mData;
+	private Cell<Type> mNext;
+	
+	public Cell(Type data, Cell<Type> next)
+	{
+		mData = data;
+		mNext = next;
+	}
+	
+	public Type getData()
+	{
+		return mData;
+	}
+	
+	public Cell<Type> getNext()
+	{
+		return mNext;
+	}
+	
+	private void setNext(Cell<Type> next)
+	{
+		mNext = next;
+	}
+	
+	
+	@Override
+	public String toString() 
+	{
+		return mData.toString();
+	}
+}
 	
 	private Cell<Type> list;
 	
@@ -13,11 +47,11 @@ public class CircularList<Type>
 	@Override
 	public String toString()
 	{
-		String msg = new String("");
+		String msg = "";
 		Cell<Type> cur = list;
 		
 		if(list==null)
-			return new String("Empty list.");
+			return "Empty list.";
 		do
 		{
 			msg +=" "+cur.toString();
@@ -31,29 +65,32 @@ public class CircularList<Type>
 	
 	public void pushFront(Type data)
 	{
-		Cell<Type> c = new Cell<Type>(data,list);
+		Cell<Type> c = new Cell<>(data,list);
 		
 		if(list == null)
 			c.setNext(c);
 		
 		Cell<Type> last = getLastCell();
 		if(last != null)
-			last.setNext(c);
+                    last.setNext(c);
 		
 		list = c;
 	}
 	
 	public void pushBack(Type data)
 	{
-		Cell<Type> c = new Cell<Type>(data,list);
+		Cell<Type> c = new Cell<>(data,list);
 		
 		if(list==null)
-			c.setNext(c);
-		
+                {
+                    c.setNext(c);
+                    list = c;
+                }
 		Cell<Type> last = getLastCell();
 		if(last != null)
-			last.setNext(c);
+                    last.setNext(c);
 		
+                c.setNext(list);
 	}
 	
 	public Boolean containsData(Type data)
@@ -70,12 +107,12 @@ public class CircularList<Type>
 		return false;
 	}
 
-	public Cell<Type> popFront()
+	public Type popFront()
 	{
 		if(list == null)
 			return null;
 		
-		Cell<Type> front = new Cell<Type>(list.getData(),list.getNext());
+		Type front = list.getData();
 		
 		getLastCell().setNext(list.getNext());
 		
@@ -85,16 +122,16 @@ public class CircularList<Type>
 		return front;
 	}
 	
-	public Cell<Type> popBack()
+	public Type popBack()
 	{
-		Cell<Type> back;
+		Type back;
 		
 		if(list == null)
 			return null;
 		
 		if(list.getNext() == null)
 		{
-			back = new Cell<Type>(list.getData(),list.getNext());
+			back = list.getData();
 			list = null;
 			return back;			
 		}
@@ -104,23 +141,23 @@ public class CircularList<Type>
 		while(cur.getNext().getNext() != list)
 			cur = cur.getNext();
 		
-		back = new Cell<Type>(cur.getNext().getData(),list);
+		back = cur.getNext().getData();
 		cur.setNext(list);
 		
 		return back;
 			
 	}
 	
-	public Cell<Type> popData(Type data)
+	public Type popData(Type data)
 	{
-		Cell<Type> prev;
+		Type prev;
 		
 		if(list == null)
 			return null;
 		
 		if(list.getData().equals(data))
 		{
-			prev = new Cell<Type>(list.getData(),list.getNext());
+			prev = list.getData();
 			list = null;
 			return prev;			
 		}
@@ -130,13 +167,13 @@ public class CircularList<Type>
 		while(!cur.getNext().getData().equals(data))
 			cur = cur.getNext();
 		
-		prev = new Cell<Type>(cur.getNext().getData(),cur.getNext().getNext());
+		prev = cur.getNext().getData();
 		cur.setNext(cur.getNext().getNext());
 		
 		return prev;
 	}
 	
-	public Cell<Type> getLastCell()
+	private Cell<Type> getLastCell()
 	{
 		Cell<Type> cell = list;
 		
@@ -148,4 +185,25 @@ public class CircularList<Type>
 		
 		return cell;
 	}
+        
+        public Type elect(int step)
+        {
+            if(list == null)
+                return null;
+            
+            while(list.getNext() != list)
+            {
+                for(int i = 0; i < step-1; i++)
+                {
+                    list = list.getNext();
+                }
+                
+                System.out.println(popFront() + " is eliminated...\n");
+                
+            }
+            
+            System.out.println(list.getData().toString() + " is elected !\n");
+            return list.getData();
+        }
+        
 } 

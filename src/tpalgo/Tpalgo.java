@@ -15,7 +15,25 @@ public class Tpalgo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        CircularList<Integer> cl = new CircularList<>();
+        
+        cl.pushBack(1);
+        cl.pushBack(2);
+        cl.pushBack(3);
+        cl.pushBack(4);
+        cl.pushBack(5);
+        cl.pushBack(6);
+        cl.pushBack(7);
+        
+        System.out.println(cl.toString()+"\n");
+       
+        
+        cl.elect(3);
+        
+        
+        System.out.println(cl.toString()+"\n");
+
     }
     
 }
