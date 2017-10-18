@@ -93,5 +93,34 @@ public class SortClass {
             k = k / 2;     
         } 
     }
+    
+    public void insertionSortByDich()
+    {
+        if(list.isEmpty())
+        {
+            return;
+        }
+        
+        for(int i = list.size()-2 ; i >= 0 ; i--)
+        {
+            int indice = dichSearch(i+1, list.size()-1, list.get(i));
+            list.add(indice, list.get(i));
+            list.remove(i);
+        }
+    }
+    
+    private int dichSearch(int start, int end, int val)
+    {
+        int indice = -1;
+        int mid = (int) (start+end)/2;
+        
+        while(list.get(mid) < val && list.get(mid-1) > val)
+        {
+            
+        }
+        
+        
+        return indice;
+    }
 
 }
