@@ -37,6 +37,10 @@ public class SortClass {
 
     public void shakerSort()
     {
+        long duration = System.currentTimeMillis();
+        long comp = 0;
+        long affect = 0;
+        
         boolean swapped = true;
         
         while(swapped)
@@ -50,6 +54,7 @@ public class SortClass {
                     swap(i,i+1);
                     swapped = true;
                 }
+                
             }
             for(int i=list.size()-2; i>=0; i--)
             {
@@ -61,6 +66,8 @@ public class SortClass {
             }
         }
         
+        duration = ( System.currentTimeMillis() - duration );
+        System.out.println("shakerSort("+list.size()+") : "+duration+ "ms - "+comp+" comparisons - "+affect+" affectations.");
     }
     
     private void swap(int i,int j)
@@ -73,6 +80,10 @@ public class SortClass {
 
     public void shellSort() 
     {     
+        long duration = System.currentTimeMillis();
+        long comp = 0;
+        long affect = 0;
+        
         int k;
         int i, j, save;
         k = list.size() / 2;
@@ -80,7 +91,7 @@ public class SortClass {
         {         
            for (i = k; i < list.size(); i++)         
             {             
-                save = list.get(i);    // Current item to be inserted             
+                save = list.get(i);              
                 for ( j = i - k; j >= 0; j = j - k)             
                 {
                     if(list.get(j) > save)
@@ -92,6 +103,9 @@ public class SortClass {
             }         
             k = k / 2;     
         } 
+        
+        duration = ( System.currentTimeMillis() - duration );
+        System.out.println("shellSort("+list.size()+") : "+duration+ "ms - "+comp+" comparisons - "+affect+" affectations.");
     }
     
     public void insertionSortByDich()
