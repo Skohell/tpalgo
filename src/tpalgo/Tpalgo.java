@@ -35,7 +35,7 @@ public class Tpalgo {
         */
       
       SortClass sc = new SortClass();
-      sc.fillList(10);
+      sc.fillList(100);
        
 
      

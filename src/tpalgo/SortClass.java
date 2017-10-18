@@ -34,5 +34,26 @@ public class SortClass {
         }
     }
     
-    
+    public void shellSort() 
+    {     
+        int k;
+        int i, j, save;
+        k = list.size() / 2;
+        while(k > 0)     
+        {         
+           for (i = k; i < list.size(); i++)         
+            {             
+                save = list.get(i);    // Current item to be inserted             
+                for ( j = i - k; j >= 0; j = j - k)             
+                {
+                    if(list.get(j) > save)
+                        list.set(j+k, list.get(j));
+                    else                         
+                        break;                     
+                }
+                list.set(j+k, save);
+            }         
+            k = k / 2;     
+        } 
+    }
 }
