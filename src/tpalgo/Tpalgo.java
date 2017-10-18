@@ -18,7 +18,7 @@ public class Tpalgo {
      */
     public static void main(String[] args) {
         
-      
+      /*
        testElection t = new testElection();
        
        //t.testExemple();
@@ -32,7 +32,11 @@ public class Tpalgo {
                t.testElection(j,i,false);
            }
        }
-        
+        */
+      
+      SortClass sc = new SortClass();
+      sc.fillList(10);
+       
 
      
     }
