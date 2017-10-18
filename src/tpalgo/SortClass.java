@@ -126,13 +126,22 @@ public class SortClass {
     private int dichSearch(int start, int end, int val)
     {
         int indice = -1;
-        int mid = (int) (start+end)/2;
-        
-        while(list.get(mid) < val && list.get(mid-1) > val)
+        int mid = (int)(start+end)/2;
+        while(start<=end && val != list.get(mid))
         {
-            
+            if(val < list.get(mid))
+            {
+                end = mid-1;
+            } 
+            else
+            {
+                start = mid+1;
+            }
+            mid = (int) (start+end)/2;
         }
         
+        
+        indice = mid+1;
         
         return indice;
     }

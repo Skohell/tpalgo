@@ -34,6 +34,7 @@ public class Tpalgo {
        }
         */
       
+
       SortClass sc = new SortClass();
       sc.fillList(100000);
       sc.shakerSort();
@@ -41,6 +42,7 @@ public class Tpalgo {
       sc.shellSort();
      sc.shakerSort();
      sc.shellSort();
+
     }
     
 
