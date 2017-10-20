@@ -12,211 +12,217 @@ public class CircularList<Type>
 	
 	public Cell(Type data, Cell<Type> next)
 	{
-		mData = data;
-		mNext = next;
+            mData = data;
+            mNext = next;
 	}
 	
 	public Type getData()
 	{
-		return mData;
+            return mData;
 	}
 	
 	public Cell<Type> getNext()
 	{
-		return mNext;
+            return mNext;
 	}
 	
 	private void setNext(Cell<Type> next)
 	{
-		mNext = next;
+            mNext = next;
 	}
 	
 	
 	@Override
 	public String toString() 
 	{
-		return mData.toString();
+            return mData.toString();
 	}
-}
+    }
 	
-	private Cell<Type> list;
-	
-	public CircularList()
-	{
-		list = null;
-	}
-	
-	@Override
-	public String toString()
-	{
-		String msg = "";
-		Cell<Type> cur = list;
-		
-		if(list==null)
-			return "Empty list.";
-		do
-		{
-			msg +=" "+cur.toString();
-			cur = cur.getNext();
-		} while(cur != list);
-		
-		
-		return msg;
-		
-	}
-	
-	public void pushFront(Type data)
-	{
-		Cell<Type> c = new Cell<>(data,list);
-		
-		if(list == null)
-			c.setNext(c);
-		
-		Cell<Type> last = getLastCell();
-		if(last != null)
-                    last.setNext(c);
-		
-		list = c;
-	}
-	
-	public void pushBack(Type data)
-	{
-		Cell<Type> c = new Cell<>(data,list);
-		
-		if(list==null)
-                {
-                    c.setNext(c);
-                    list = c;
-                }
-		Cell<Type> last = getLastCell();
-		if(last != null)
-                    last.setNext(c);
-		
-                c.setNext(list);
-	}
-	
-	public Boolean containsData(Type data)
-	{
-		Cell <Type> cell = list;
-		
-		do
-		{
-			if(cell.getData() == data)
-				return true;
-			cell = cell.getNext();
-		} while(cell != list);
-		
-		return false;
-	}
+    private Cell<Type> first;
+    private Cell<Type> last;
 
-	public Type popFront()
-	{
-		if(list == null)
-			return null;
-		
-		Type front = list.getData();
-		
-		getLastCell().setNext(list.getNext());
-		
-		list = list.getNext();
-		
+    public CircularList()
+    {
+        first = null;
+        last = null;
+    }
 
-		return front;
-	}
-	
-	public Type popBack()
-	{
-		Type back;
-		
-		if(list == null)
-			return null;
-		
-		if(list.getNext() == null)
-		{
-			back = list.getData();
-			list = null;
-			return back;			
-		}
-			
-		Cell<Type> cur = list;
-		
-		while(cur.getNext().getNext() != list)
-			cur = cur.getNext();
-		
-		back = cur.getNext().getData();
-		cur.setNext(list);
-		
-		return back;
-			
-	}
-	
-	public Type popData(Type data)
-	{
-		Type prev;
-		
-		if(list == null)
-			return null;
-		
-		if(list.getData().equals(data))
-		{
-			prev = list.getData();
-			list = null;
-			return prev;			
-		}
-			
-		Cell<Type> cur = list;
-		
-		while(!cur.getNext().getData().equals(data))
-			cur = cur.getNext();
-		
-		prev = cur.getNext().getData();
-		cur.setNext(cur.getNext().getNext());
-		
-		return prev;
-	}
-	
-	private Cell<Type> getLastCell()
-	{
-		Cell<Type> cell = list;
-		
-		if(cell == null)
-			return null;
-		
-		while(cell.getNext()!=list)
-			cell = cell.getNext();
-		
-		return cell;
-	}
-        
-        public Type elect(int step, boolean output)
+    @Override
+    public String toString()
+    {
+        String msg = "";
+        Cell<Type> cur = first;
+
+        if(first==null)
+                return "Empty list.";
+        do
         {
-            
-           
-            
-            if(list == null)
-                return null;
-            
-            while(list.getNext() != list)
-            {
-                for(int i = 0; i < step-1; i++)
-                {
-                    list = list.getNext();
-                }
-                
-                
-                Type val = popFront();
-                
-                if(output)
-                {
-                    System.out.println(val.toString() + " is eliminated...");
+            msg +=" "+cur.toString();
+            cur = cur.getNext();
+        } while(cur != first);
 
-                }
-                
-            }
-            
-            
-            System.out.println(list.getData().toString() + " is elected !");
-            return list.getData();
+
+        return msg;
+
+    }
+
+    public void pushFront(Type data)
+    {
+        Cell<Type> c = new Cell<>(data,first);
+
+        if(first == null)
+        {
+            c.setNext(c);
+            last = c;
+        } else {
+            last.setNext(c);
         }
+
+        first = c;
+    }
+
+    public void pushBack(Type data)
+    {
+        Cell<Type> c = new Cell<>(data,first);
+
+        if(first==null)
+        {
+            c.setNext(c);
+            first = c;
+        } else {
+            last.setNext(c);
+            c.setNext(first);
+        }
+        last = c;
+    }
+
+    public Boolean containsData(Type data)
+    {
+        Cell <Type> cell = first;
+
+        do
+        {
+            if(cell.getData().equals(data))
+                    return true;
+            cell = cell.getNext();
+        } while(cell != first);
+
+        return false;
+    }
+
+    public Type popFront()
+    {
+        if(first == null)
+            return null;
+
+        Type front = first.getData();
+
+        last.setNext(first.getNext());
+
+        first = first.getNext();
+
+
+        return front;
+    }
+
+    public Type popBack()
+    {
+        Type back;
+
+        if(first == null)
+            return null;
+
+        /*if(first.getNext() == null)
+        {
+            back = first.getData();
+            first = null;
+            return back;			
+        }*/
+
+        Cell<Type> cur = first;
+
+        while(cur.getNext() != last)
+            cur = cur.getNext();
+
+        back = last.getData();
+        cur.setNext(first);
+        last = cur;
+
+        return back;
+
+    }
+
+    public Type popData(Type data)
+    {
+        Type prev;
+
+        if(first == null)
+            return null;
+
+        if(first.getData().equals(data))
+        {
+            prev = first.getData();
+            first = first.getNext();
+            last.setNext(first);
+            return prev;			
+        }
+
+        Cell<Type> cur = first;
+
+        while(!cur.getNext().getData().equals(data))
+        {
+            if(cur == last)
+                return null;
+            cur = cur.getNext();
+        }
+
+        prev = cur.getNext().getData();
+        cur.setNext(cur.getNext().getNext());
+
+        return prev;
+    }
+
+    /*private Cell<Type> getLastCell()
+    {
+        Cell<Type> cell = first;
+
+        if(cell == null)
+            return null;
+
+        while(cell.getNext()!=first)
+                cell = cell.getNext();
+
+        return cell;
+    }*/
+
+    public Type elect(int step, boolean output)
+    {
+        if(first == null)
+            return null;
+
+        while(first.getNext() != first)
+        {
+            for(int i = 0; i < step-1; i++)
+            {
+                first = first.getNext();
+                last = last.getNext();
+            }
+
+
+            Type val = popFront();
+
+            if(output)
+            {
+                System.out.println(val.toString() + " is eliminated...");
+
+            }
+
+        }
+
+
+        System.out.println(first.getData().toString() + " is elected !");
+        return first.getData();
+    }
         
 } 

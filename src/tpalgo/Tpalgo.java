@@ -17,8 +17,24 @@ public class Tpalgo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-      /*
+       
+       /*
+       CircularList<Integer> cl = new CircularList<>();
+       cl.pushBack(1);
+       cl.pushBack(2);
+       cl.pushBack(3);
+       cl.pushBack(4);
+       cl.pushBack(5);
+       cl.pushBack(6);
+       
+       cl.popBack();
+       cl.popFront();
+       cl.popData(8);
+       
+       System.out.println(cl.toString());
+       */
+       
+       
        testElection t = new testElection();
        
        //t.testExemple();
@@ -32,16 +48,17 @@ public class Tpalgo {
                t.testElection(j,i,false);
            }
        }
-        */
+        
       
-
-      SortClass sc = new SortClass();
-      sc.fillList(100000);
-      sc.shakerSort();
-      sc.fillList(100000);
-      sc.shellSort();
-     sc.shakerSort();
-     sc.shellSort();
+        /*
+        SortClass sc = new SortClass();
+        sc.fillList(100000);
+        sc.shakerSort();
+        sc.fillList(100000);
+        sc.shellSort();
+        sc.shakerSort();
+        sc.shellSort();
+        */
 
     }
     
