@@ -32,7 +32,7 @@ public class Tpalgo {
        cl.popData(8);
        
        System.out.println(cl.toString());
-       */
+       
        
        
        testElection t = new testElection();
@@ -47,18 +47,20 @@ public class Tpalgo {
            {
                t.testElection(j,i,false);
            }
-       }
+       }*/
         
       
-        /*
+        
         SortClass sc = new SortClass();
-        sc.fillList(100000);
-        sc.shakerSort();
-        sc.fillList(100000);
-        sc.shellSort();
-        sc.shakerSort();
-        sc.shellSort();
-        */
+        //sc.fillList(100000);
+        //sc.shakerSort();
+        
+        //sc.fillList(100000);
+        //sc.shellSort();
+        
+        //sc.fillList(100000);
+        //sc.insertionSortByDich();
+        
 
     }
     

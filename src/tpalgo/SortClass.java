@@ -91,17 +91,23 @@ public class SortClass {
         {         
            for (i = k; i < list.size(); i++)         
             {             
-                save = list.get(i);              
+                save = list.get(i);
+                affect++;
                 for ( j = i - k; j >= 0; j = j - k)             
                 {
+                    comp++;
                     if(list.get(j) > save)
+                    {
                         list.set(j+k, list.get(j));
+                        affect++;
+                    }
                     else                         
                         break;                     
                 }
                 list.set(j+k, save);
+                affect++;
             }         
-            k = k / 2;     
+            k = k / 2;
         } 
         
         duration = ( System.currentTimeMillis() - duration );
