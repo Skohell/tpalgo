@@ -43,25 +43,38 @@ public class Tpalgo {
 //        sc.dichInsertionSort();
 
         
-        SortClass sc = new SortClass();
-        FileWriter fw = new FileWriter("shaker.csv");
-        BufferedWriter output = new BufferedWriter(fw);
+        SortClass sc = new SortClass()
+                ;
+        FileWriter shakerfw = new FileWriter("shaker.csv");
+        BufferedWriter shakeroutput = new BufferedWriter(shakerfw);
+        
+        FileWriter shellfw = new FileWriter("shell.csv");
+        BufferedWriter shelloutput = new BufferedWriter(shellfw);
+        
+        FileWriter dichfw = new FileWriter("dich.csv");
+        BufferedWriter dichoutput = new BufferedWriter(dichfw);
  
-        int[] sizes = {100, 1000, 10000, 100000,1000000};
+        int[] sizes = {5000,20000,50000,75000};
         for (int i : sizes) {
             
-            //sc.fillList(i);
-           //output.write(sc.shellSort()); 
-//            
             sc.fillList(i);
-            sc.dichInsertionSort();
+            shelloutput.write(sc.shellSort());
             
-            //sc.fillList(i);
-            //output.write(sc.shakerSort());
-            
+            sc.fillList(i);
+            dichoutput.write(sc.dichInsertionSort());
+
+            sc.fillList(i);
+            shakeroutput.write(sc.shakerSort());
+
         }
-        output.flush();
-        output.close();
+        shakeroutput.flush();
+        shakeroutput.close();
+        
+        shelloutput.flush();
+        shelloutput.close();
+        
+        dichoutput.flush();
+        dichoutput.close();
     }
     
 
