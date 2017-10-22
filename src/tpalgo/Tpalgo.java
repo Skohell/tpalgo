@@ -1,8 +1,13 @@
 package tpalgo;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Tpalgo {
 
-    public static void main(String[] args) {   
+    public static void main(String[] args) throws IOException {   
        
        
        TestElection t = new TestElection();
@@ -27,19 +32,36 @@ public class Tpalgo {
        
        
       
+//        SortClass sc = new SortClass();
+//
+//        sc.fillList(100000);
+//        sc.shakerSort();
+//        sc.fillList(100000);
+//        sc.shellSort();
+//
+//        sc.fillList(100000);
+//        sc.dichInsertionSort();
+
         
         SortClass sc = new SortClass();
-
-        sc.fillList(100000);
-        sc.shakerSort();
-
-        sc.fillList(100000);
-        sc.shellSort();
-
-        sc.fillList(100000);
-        sc.dichInsertionSort();
-        
-
+        FileWriter fw = new FileWriter("shaker.csv");
+        BufferedWriter output = new BufferedWriter(fw);
+ 
+        int[] sizes = {100, 1000, 10000, 100000,1000000};
+        for (int i : sizes) {
+            
+            //sc.fillList(i);
+           //output.write(sc.shellSort()); 
+//            
+            sc.fillList(i);
+            sc.dichInsertionSort();
+            
+            //sc.fillList(i);
+            //output.write(sc.shakerSort());
+            
+        }
+        output.flush();
+        output.close();
     }
     
 

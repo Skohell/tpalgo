@@ -25,7 +25,7 @@ public class SortClass {
         }
     }
     
-    public void shakerSort()
+    public String shakerSort()
     {
         long duration = System.currentTimeMillis();
         long comp = 0;
@@ -45,9 +45,11 @@ public class SortClass {
             
             for(int i = b; i< e; i++)
             {
+                comp++;
                 if(list.get(i) > list.get(i+1))
                 {
                     swap(i,i+1);
+                    affect+=3;
                     newE = i;
                     swapped = true;
                 }
@@ -60,8 +62,10 @@ public class SortClass {
             
             for(int i = e; i>= b; i--)
             {
+                comp++;
                 if(list.get(i) > list.get(i+1))
                 {
+                    affect+=3;
                     swap(i,i+1);
                     newB = i;
                     swapped = true;
@@ -76,6 +80,7 @@ public class SortClass {
         
         duration = ( System.currentTimeMillis() - duration );
         System.out.println("shakerSort("+list.size()+") : "+duration+ "ms - "+comp+" comparisons - "+affect+" affectations.");
+        return(list.size()+","+duration+","+comp+","+affect+",\n");
     }
 
     private void swap(int i,int j)
@@ -85,8 +90,7 @@ public class SortClass {
         list.set(j,tmp);
     }
     
-
-    public void shellSort() 
+    public String shellSort() 
     {     
         long duration = System.currentTimeMillis();
         long comp = 0;
@@ -120,51 +124,52 @@ public class SortClass {
         
         duration = ( System.currentTimeMillis() - duration );
         System.out.println("shellSort("+list.size()+") : "+duration+ "ms - "+comp+" comparisons - "+affect+" affectations.");
+        return(list.size()+","+duration+","+comp+","+affect+",\n");
     }
     
-    public void dichInsertionSort()
-    {
+    public String dichInsertionSort() {
         long duration = System.currentTimeMillis();
-        long comp = 0;
-        long affect = 0;
-        
-        if(list.isEmpty())
-        {
-            return;
+        int comp = 0;
+        int affect = 0;
+
+        if (list.isEmpty()) {
+            return null;
         }
-        
-        for(int i = list.size()-2 ; i >= 0 ; i--)
-        {
-            int indice = dichSearch(i+1, list.size()-1, list.get(i));
+
+        for (int i = list.size() - 2; i >= 0; i--) {
+
+            int start = i + 1;
+            int indice;
+            int end = list.size() - 1;
+            
+            affect++;
+            int val = list.get(i);
+
+            int mid = (int) (start + end) / 2;
+            while (start <= end && val != list.get(mid)) {
+                comp++;
+
+                comp++;
+                if (val < list.get(mid)) {
+                    end = mid - 1;
+                } else {
+                    start = mid + 1;
+                }
+                mid = (int) (start + end) / 2;
+            }
+
+            indice = mid + 1;
+
+            affect += (indice-i)+2;
             list.add(indice, list.get(i));
             list.remove(i);
         }
-        
-        duration = ( System.currentTimeMillis() - duration );
-        System.out.println("dichInsertionSort("+list.size()+") : "+duration+ "ms - "+comp+" comparisons - "+affect+" affectations.");
+
+        duration = (System.currentTimeMillis() - duration);
+        System.out.println("dichInsertionSort(" + list.size() + ") : " + duration + "ms - " + comp + " comparisons - " + affect + " affectations.");
+        return(list.size()+","+duration+","+comp+","+affect+",\n");
     }
     
-    private int dichSearch(int start, int end, int val)
-    {
-        int indice = -1;
-        int mid = (int)(start+end)/2;
-        while(start<=end && val != list.get(mid))
-        {
-            if(val < list.get(mid))
-            {
-                end = mid-1;
-            } 
-            else
-            {
-                start = mid+1;
-            }
-            mid = (int) (start+end)/2;
-        }
-        
-        
-        indice = mid+1;
-        
-        return indice;
-    }
+ 
 
 }
