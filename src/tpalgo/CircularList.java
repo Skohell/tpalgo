@@ -1,7 +1,5 @@
 package tpalgo;
 
-import sun.rmi.runtime.Log;
-
 public class CircularList<Type> 
 {
 
@@ -133,13 +131,6 @@ public class CircularList<Type>
         if(first == null)
             return null;
 
-        /*if(first.getNext() == null)
-        {
-            back = first.getData();
-            first = null;
-            return back;			
-        }*/
-
         Cell<Type> cur = first;
 
         while(cur.getNext() != last)
@@ -183,32 +174,22 @@ public class CircularList<Type>
         return prev;
     }
 
-    /*private Cell<Type> getLastCell()
-    {
-        Cell<Type> cell = first;
-
-        if(cell == null)
-            return null;
-
-        while(cell.getNext()!=first)
-                cell = cell.getNext();
-
-        return cell;
-    }*/
-
     public Type elect(int step, boolean output)
     {
         if(first == null)
             return null;
 
+        int cpt = 0;
+        
+        
         while(first.getNext() != first)
         {
             for(int i = 0; i < step-1; i++)
             {
                 first = first.getNext();
                 last = last.getNext();
+                cpt++;
             }
-
 
             Type val = popFront();
 
@@ -221,7 +202,7 @@ public class CircularList<Type>
         }
 
 
-        System.out.println(first.getData().toString() + " is elected !");
+        System.out.println(first.getData().toString() + " is elected ! (cpt="+cpt+")");
         return first.getData();
     }
         

@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tpalgo;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-/**
- *
- * @author gravallg
- */
 public class SortClass {
     
     ArrayList<Integer> list;
@@ -34,42 +25,59 @@ public class SortClass {
         }
     }
     
-
     public void shakerSort()
     {
         long duration = System.currentTimeMillis();
         long comp = 0;
         long affect = 0;
         
-        boolean swapped = true;
+        int b = 0;
+        int newB;
+        int e = list.size()-1;
+        int newE;
         
-        while(swapped)
+        boolean swapped = false;
+        
+        while(b<=e)
         {
-            swapped = false;
+            newB=e;
+            newE=b;
             
-            for(int i = 0; i<list.size()-2; i++)
+            for(int i = b; i< e; i++)
             {
                 if(list.get(i) > list.get(i+1))
                 {
                     swap(i,i+1);
+                    newE = i;
                     swapped = true;
                 }
-                
             }
-            for(int i=list.size()-2; i>=0; i--)
+            
+            if(!swapped)
+                break;
+            
+            e = newE-1;
+            
+            for(int i = e; i>= b; i--)
             {
                 if(list.get(i) > list.get(i+1))
                 {
                     swap(i,i+1);
+                    newB = i;
                     swapped = true;
                 }
             }
+            
+            if(!swapped)
+                break;
+            
+            b=newB+1;
         }
         
         duration = ( System.currentTimeMillis() - duration );
         System.out.println("shakerSort("+list.size()+") : "+duration+ "ms - "+comp+" comparisons - "+affect+" affectations.");
     }
-    
+
     private void swap(int i,int j)
     {
         Integer tmp = list.get(i);
@@ -114,8 +122,12 @@ public class SortClass {
         System.out.println("shellSort("+list.size()+") : "+duration+ "ms - "+comp+" comparisons - "+affect+" affectations.");
     }
     
-    public void insertionSortByDich()
+    public void dichInsertionSort()
     {
+        long duration = System.currentTimeMillis();
+        long comp = 0;
+        long affect = 0;
+        
         if(list.isEmpty())
         {
             return;
@@ -127,6 +139,9 @@ public class SortClass {
             list.add(indice, list.get(i));
             list.remove(i);
         }
+        
+        duration = ( System.currentTimeMillis() - duration );
+        System.out.println("dichInsertionSort("+list.size()+") : "+duration+ "ms - "+comp+" comparisons - "+affect+" affectations.");
     }
     
     private int dichSearch(int start, int end, int val)
