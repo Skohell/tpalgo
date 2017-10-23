@@ -1,76 +1,120 @@
 package tpalgo;
 
-public class CircularList<Type> 
-{
+/**
+ * Class representing a circular simple linked list.
+ *
+ * @author gravallg
+ * @param <Type> Type of the data the list will contain.
+ */
+public class CircularList<Type> {
 
-    private class Cell<Type> 
-    {
-	private Type mData;
-	private Cell<Type> mNext;
-	
-	public Cell(Type data, Cell<Type> next)
-	{
+    /**
+     * Class representing a cell of a circular list.
+     *
+     * @param <Type> Type of the data the cell will contain.
+     */
+    private class Cell<Type> {
+
+        // Contains the data of the cell.
+        private Type mData;
+
+        // Contains the next cell.
+        private Cell<Type> mNext;
+
+        /**
+         * Default constructor of the Cell class.
+         *
+         * @param data
+         * @param next
+         */
+        public Cell(Type data, Cell<Type> next) {
             mData = data;
             mNext = next;
-	}
-	
-	public Type getData()
-	{
+        }
+
+        /**
+         * Getter of the data contained in the cell.
+         *
+         * @return Data contained in the cell.
+         */
+        public Type getData() {
             return mData;
-	}
-	
-	public Cell<Type> getNext()
-	{
+        }
+
+        /**
+         * Getter of the next cell.
+         *
+         * @return The next cell.
+         */
+        public Cell<Type> getNext() {
             return mNext;
-	}
-	
-	private void setNext(Cell<Type> next)
-	{
+        }
+
+        /**
+         * Private setter of the next cell.
+         *
+         * @param next Next cell.
+         */
+        private void setNext(Cell<Type> next) {
             mNext = next;
-	}
-	
-	
-	@Override
-	public String toString() 
-	{
+        }
+
+        /**
+         * Getter of a string representation of the cell.
+         *
+         * @return String representation of the cell.
+         */
+        @Override
+        public String toString() {
             return mData.toString();
-	}
+        }
     }
-	
+
+    // Contains the first cell of the list.
     private Cell<Type> first;
+
+    // Contains the last cell of the list.
     private Cell<Type> last;
 
-    public CircularList()
-    {
+    /**
+     * Default constructor of the CircularList class.
+     */
+    public CircularList() {
         first = null;
         last = null;
     }
 
+    /**
+     * Getter of a string representation of the circular list.
+     *
+     * @return String representation of the circular list.
+     */
     @Override
-    public String toString()
-    {
+    public String toString() {
         String msg = "";
         Cell<Type> cur = first;
 
-        if(first==null)
-                return "Empty list.";
-        do
-        {
-            msg +=" "+cur.toString();
+        if (first == null) {
+            return "Empty list.";
+        }
+        do {
+            msg += " " + cur.toString();
             cur = cur.getNext();
-        } while(cur != first);
-
+        } while (cur != first);
 
         return msg;
 
     }
 
-    public void pushFront(Type data)
-    {
-        Cell<Type> c = new Cell<>(data,first);
+    /**
+     * Pushes a given data to the list in first position.
+     *
+     * @param data Data that will be pushed to the front of the list.
+     */
+    public void pushFront(Type data) {
+        Cell<Type> c = new Cell<>(data, first);
 
-        if(first == null)
-        {
+        if (first == null) {
             c.setNext(c);
             last = c;
         } else {
@@ -80,12 +124,15 @@ public class CircularList<Type>
         first = c;
     }
 
-    public void pushBack(Type data)
-    {
-        Cell<Type> c = new Cell<>(data,first);
+    /**
+     * Pushes a given data to the list in last position.
+     *
+     * @param data Data that will be pushed to the back of the list.
+     */
+    public void pushBack(Type data) {
+        Cell<Type> c = new Cell<>(data, first);
 
-        if(first==null)
-        {
+        if (first == null) {
             c.setNext(c);
             first = c;
         } else {
@@ -95,24 +142,34 @@ public class CircularList<Type>
         last = c;
     }
 
-    public Boolean containsData(Type data)
-    {
-        Cell <Type> cell = first;
+    /**
+     * Searches if a given data exists in the list.
+     *
+     * @param data Data that is searched for in the list.
+     * @return true if the list contains the value.
+     */
+    public Boolean containsData(Type data) {
+        Cell<Type> cell = first;
 
-        do
-        {
-            if(cell.getData().equals(data))
-                    return true;
+        do {
+            if (cell.getData().equals(data)) {
+                return true;
+            }
             cell = cell.getNext();
-        } while(cell != first);
+        } while (cell != first);
 
         return false;
     }
 
-    public Type popFront()
-    {
-        if(first == null)
+    /**
+     * Removes the data in the first position of the list.
+     *
+     * @return The data in the first position of the list or null.
+     */
+    public Type popFront() {
+        if (first == null) {
             return null;
+        }
 
         Type front = first.getData();
 
@@ -120,21 +177,26 @@ public class CircularList<Type>
 
         first = first.getNext();
 
-
         return front;
     }
 
-    public Type popBack()
-    {
+    /**
+     * Removes the data in the last position of the list.
+     *
+     * @return The data in the last position of the list or null.
+     */
+    public Type popBack() {
         Type back;
 
-        if(first == null)
+        if (first == null) {
             return null;
+        }
 
         Cell<Type> cur = first;
 
-        while(cur.getNext() != last)
+        while (cur.getNext() != last) {
             cur = cur.getNext();
+        }
 
         back = last.getData();
         cur.setNext(first);
@@ -144,27 +206,31 @@ public class CircularList<Type>
 
     }
 
-    public Type popData(Type data)
-    {
+    /**
+     * Removes the given data in the list.
+     * @param data The data to remove from the list.
+     * @return The data in the the list or null.
+     */
+    public Type popData(Type data) {
         Type prev;
 
-        if(first == null)
+        if (first == null) {
             return null;
+        }
 
-        if(first.getData().equals(data))
-        {
+        if (first.getData().equals(data)) {
             prev = first.getData();
             first = first.getNext();
             last.setNext(first);
-            return prev;			
+            return prev;
         }
 
         Cell<Type> cur = first;
 
-        while(!cur.getNext().getData().equals(data))
-        {
-            if(cur == last)
+        while (!cur.getNext().getData().equals(data)) {
+            if (cur == last) {
                 return null;
+            }
             cur = cur.getNext();
         }
 
@@ -174,36 +240,42 @@ public class CircularList<Type>
         return prev;
     }
 
-    public Type elect(int step, boolean output)
-    {
-        if(first == null)
+    /**
+     * Elects an item of the list by removing items every "step" position until
+     * one is left.
+     *
+     * @param step Step used to remove items.
+     * @param output Prints each step of the process if true.
+     * @return The elected item.
+     */
+    public Type elect(int step, boolean output) {
+        if (first == null) {
             return null;
+        }
 
         int cpt = 0;
-        
-        
-        while(first.getNext() != first)
-        {
-            for(int i = 0; i < step-1; i++)
-            {
+
+        // Until there's one item left.
+        while (first.getNext() != first) {
+            // We cycle to the next step item...
+            for (int i = 0; i < step - 1; i++) {
                 first = first.getNext();
                 last = last.getNext();
                 cpt++;
             }
 
+            // ... to remove it.
             Type val = popFront();
 
-            if(output)
-            {
+            if (output) {
                 System.out.println(val.toString() + " is eliminated...");
 
             }
 
         }
 
-
-        System.out.println(first.getData().toString() + " is elected ! (cpt="+cpt+")");
+        System.out.println(first.getData().toString() + " is elected ! (cpt=" + cpt + ")");
         return first.getData();
     }
-        
-} 
+
+}
