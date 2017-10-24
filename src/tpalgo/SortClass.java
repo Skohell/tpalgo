@@ -49,10 +49,12 @@ public class SortClass {
         int e = list.size() - 1;
         int newE;
 
-        boolean swapped = false;
-
+        
         //While we have unsorted values.
         while (b <= e) {
+            
+            boolean swapped = false;
+
             newB = e;
             newE = b;
             
@@ -62,7 +64,7 @@ public class SortClass {
                 if (list.get(i) > list.get(i + 1)) {
                     swap(i, i + 1);
                     affect += 3;
-                    newE = i;
+                    newE = i+1;
                     swapped = true;
                 }
             }
@@ -74,6 +76,7 @@ public class SortClass {
             
             //We are sure that one item was sorted an moved to the right.
             e = newE - 1;
+            swapped = false;
 
             //Bubble sort from right to left.
             for (int i = e; i >= b; i--) {
